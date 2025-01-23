@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Обо мне</h1>
+    </header>
+    <nav>
+        <a href="#">Главная</a>
+        <a href="#">Обо мне</a>
+        <a href="#">Контакты</a>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Привет!</h2>
+            <p>Меня зовут [Ваше имя], и это мой личный блог. Здесь я делюсь своими мыслями, проектами и историями из жизни.</p>
+        </section>
+        <section>
+            <h2>Чем я занимаюсь?</h2>
+            <p>Я увлечен [ваша основная сфера деятельности или интересы]. Моя цель — создавать полезный контент и вдохновлять других. На этом блоге вы найдете статьи на тему [темы блога].</p>
+        </section>
+        <section>
+            <h2>Мои увлечения</h2>
+            <ul>
+                <li>Чтение книг</li>
+                <li>Путешествия</li>
+                <li>Изучение новых технологий</li>
+                <li>Написание статей</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2025 Мой блог. Все права защищены.</p>
+    </footer>
+</body>
+</html>

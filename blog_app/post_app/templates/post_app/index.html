@@ -1,18 +1,20 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Блог</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 </head>
 <body>
     <header>
         <h1>Добро пожаловать в мой блог</h1>
     </header>
     <nav>
-        <a href="#">Главная</a>
-        <a href="#">Обо мне</a>
+        <a href="{% url 'index' %}">Главная</a>
+        <a href="{% url 'about' %}">Обо мне</a>
         <a href="#">Контакты</a>
     </nav>
     <div class="container">
