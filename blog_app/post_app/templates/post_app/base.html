@@ -14,8 +14,8 @@
 <body>
     <header>
         <h1>{{ title }}</h1>
-        <button class="auth-btn" onclick="location.href='#'">Log in</button>
-        <button class="auth-btn" onclick="location.href='#'">Sign up</button>
+        <a class="auth-btn" href="{% url 'user:login' %}">Log in</a>
+        <a class="auth-btn" href="{% url 'user:signup' %}">Sign up</a>
     </header>
     <nav>
         <a href="{% url 'index' %}">Главная</a>
