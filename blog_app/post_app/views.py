@@ -4,7 +4,13 @@ from django.shortcuts import render
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    context = {"title": "Posts"}
+    return render(request, 'index.html', context)
 
 def about(request):
-    return render(request, 'about.html')
+    context = {"title": "About me"}
+    return render(request, 'about.html', context)
+
+def contacts(request):
+    context = {"title": "Contacts"}
+    return render(request, 'contacts.html', context)

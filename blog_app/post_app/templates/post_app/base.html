@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обо мне</title>
+    <title>{{ title }}</title>
     
     {% block css %}
     {% endblock %}
@@ -13,12 +13,12 @@
 </head>
 <body>
     <header>
-        <h1>Обо мне</h1>
+        <h1>{{ title }}</h1>
     </header>
     <nav>
         <a href="{% url 'index' %}">Главная</a>
         <a href="{% url 'about' %}">Обо мне</a>
-        <a href="#">Контакты</a>
+        <a href="{% url 'contacts' %}">Контакты</a>
     </nav>
     <div class="container">
     
