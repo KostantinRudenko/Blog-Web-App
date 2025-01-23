@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    
+    {% block css %}
+    {% endblock %}
+
+</head>
+<body>
+    <header>
+        <h1>Обо мне</h1>
+    </header>
+    <nav>
+        <a href="{% url 'index' %}">Главная</a>
+        <a href="{% url 'about' %}">Обо мне</a>
+        <a href="#">Контакты</a>
+    </nav>
+    <div class="container">
+    
+        {% block content %}
+        {% endblock %}
+
+    </div>
+<footer>
+    <p>&copy; 2025 Мой блог. Все права защищены.</p>
+</footer>
+</body>
+</html>
