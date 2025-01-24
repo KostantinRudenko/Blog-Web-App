@@ -6,4 +6,5 @@ def login(request):
     return render(request, 'user_app/login.html', context)
 
 def signup(request):
-    return render(request, 'user_app/signup.html')
+    context = {"title" : "Signup"}
+    return render(request, 'user_app/signup.html', context)
