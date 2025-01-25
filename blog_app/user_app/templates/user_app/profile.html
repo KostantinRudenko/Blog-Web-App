@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/style.css' %}">
+<link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Профиль пользователя</h2>
+<div class="user-details">
+    <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Дата регистрации:</strong> {{ user.date_joined|date:"d.m.Y" }}</p>
+</div>
+<h3>Доступные действия</h3>
+<div class="actions-list">
+    <a href="#">Редактировать профиль</a>
+    <a href="#">Сменить пароль</a>
+    <a href="#">Удалить аккаунт</a>
+</div>
+{% endblock %}

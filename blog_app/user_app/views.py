@@ -32,3 +32,7 @@ def signup(request):
     context = {"title" : "Signup",
                'form' : form}
     return render(request, 'user_app/signup.html', context)
+
+def profile(request):
+    context = {"title" : "Profile"}
+    return render(request, 'user_app/profile.html', context)

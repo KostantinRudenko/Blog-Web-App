@@ -1,0 +1,37 @@
+.user-details {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.user-details p {
+    margin: 10px 0;
+}
+
+.actions-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.actions-list li {
+    margin: 10px 0;
+}
+
+.actions-list a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    background-color: #f4f4f9;
+    padding: 10px 15px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.actions-list a:hover {
+    background-color: #ddd;
+    color: #000;
+}
