@@ -29,6 +29,13 @@ nav a:hover {
     text-decoration: underline;
 }
 
+.nav-divider {
+    border: 0;
+    height: 2px;
+    background: #ddd;
+    margin: 20px 0;
+}
+
 .container {
     max-width: 800px;
     margin: 20px auto;

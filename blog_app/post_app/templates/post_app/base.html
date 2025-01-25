@@ -14,19 +14,21 @@
 <body>
     <header>
         <h1>{{ title }}</h1>
-        <a class="auth-btn" href="{% url 'user:login' %}">Log in</a>
-        <a class="auth-btn" href="{% url 'user:signup' %}">Sign up</a>
     </header>
-    <nav>
-        <a href="{% url 'index' %}">Главная</a>
-        <a href="{% url 'about' %}">Обо мне</a>
-        <a href="{% url 'contacts' %}">Контакты</a>
-    </nav>
     <div class="container">
-    
+        <nav>
+            <a class="nav-link" href="{% url 'index' %}">Главная</a>
+            <a class="nav-link" href="{% url 'about' %}">Обо мне</a>
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="#">Account</a>
+            {% else %}
+            <a class="nav-link" href="{% url 'user:login' %}">Log in</a>
+            <a class="nav-link" href="{% url 'user:signup' %}">Sign up</a>
+            {% endif %}
+        </nav>
+        <hr class="nav-divider">
         {% block content %}
         {% endblock %}
-
     </div>
 <footer>
     <p>&copy; 2025 Мой блог. Все права защищены.</p>

@@ -6,9 +6,6 @@
 <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 {% endblock %}
 
-{% block title %}Вход в аккаунт
-{% endblock %}
-
 {% block content %}
 <form action="{% url 'user:login' %}" method="post">
     {% csrf_token %}
