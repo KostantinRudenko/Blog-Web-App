@@ -1,7 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 class UserAuthenticationForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'id':'username',
@@ -21,3 +21,12 @@ class UserSignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+class UserProfileForm(UserChangeForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'id': 'username'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'id': 'email', 'readonly': True}))
+    last_login = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'last_login', 'readonly': True}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'last_login']

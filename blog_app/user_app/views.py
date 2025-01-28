@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from .forms import UserAuthenticationForm, UserSignupForm
+from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm
 
 # Create your views here.
 def login(request):
@@ -34,5 +34,14 @@ def signup(request):
     return render(request, 'user_app/signup.html', context)
 
 def profile(request):
-    context = {"title" : "Profile"}
+    if request.method == "POST":
+        print("POST")
+        form = UserProfileForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('user:profile'))
+    else:
+        form = UserProfileForm(instance=request.user)
+    context = {"title" : "Profile",
+               "form" : form}
     return render(request, 'user_app/profile.html', context)
