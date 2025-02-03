@@ -22,9 +22,9 @@
         <label for="{{ form.last_login.id_for_label }}"><strong>Last login:</strong></label>
         {{ form.last_login }}
     </div>
-    <div>
-        <button type="submit" name="action" value="save">Save changes</button>
-        <!-- <button type="submit" name="action" value="delete">Delete account</button> -->
+    <div class="buttons">
+        <button type="submit" name="save" value="save">Save changes</button>
+        <button type="submit" name="logout" value="logout">Logout</button>
     </div>
 </form>
 {% endblock %}

@@ -35,11 +35,14 @@ def signup(request):
 
 def profile(request):
     if request.method == "POST":
-        print("POST")
-        form = UserProfileForm(data=request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('user:profile'))
+        if "logout" in request.POST:
+            auth.logout(request)
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            form = UserProfileForm(data=request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = UserProfileForm(instance=request.user)
     context = {"title" : "Profile",
