@@ -15,7 +15,9 @@
     <div class="alert">
         {% if messages %}
             <div class="alert alert-success" role="alert">
-                {{ messages }}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
             </div>
         {% endif %}
         {% if form.non_field_errors %}

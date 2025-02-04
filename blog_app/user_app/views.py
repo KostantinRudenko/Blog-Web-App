@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
 
 from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm
@@ -26,6 +26,7 @@ def signup(request):
         form = UserSignupForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Account created successfully!")
             return HttpResponseRedirect(reverse('user:login'))
     else:
         form = UserSignupForm()

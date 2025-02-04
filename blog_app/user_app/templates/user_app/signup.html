@@ -4,9 +4,23 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'styles/auth_style.css' %}">
 <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+<link rel="stylesheet" href="{% static 'styles/alerts.css' %}">
 {% endblock %}
 
 {% block content %}
+{% if form.errors %}
+    <div class="alert">
+        {% if form.errors %}
+            <div class="alert alert-error" role="alert">
+                {% for field in form %}
+                    {% if field.errors %}
+                        {{ field.errors }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
 <form action="{% url 'user:signup' %}" method="post">
     {% csrf_token %}
 
