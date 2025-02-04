@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'styles/style.css' %}">
+<link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Профиль пользователя</h2>
+<form action="{% url 'user:profile' %}" method="post">
+    {% csrf_token %}
+    <div>    
+        <label for="{{ form.username.id_for_label }}"><strong>Username:</strong></label>
+        {{ form.username }}
+    </div>
+    <div>
+        <label for="{{ form.email.id_for_label }}"><strong>Email:</strong></label>
+        {{ form.email }}
+    </div>
+    <div>
+        <label for="{{ form.last_login.id_for_label }}"><strong>Last login:</strong></label>
+        {{ form.last_login }}
+    </div>
+    <div class="buttons">
+        <button type="submit" name="save" value="save">Save changes</button>
+        <button type="submit" name="logout" value="logout">Logout</button>
+    </div>
+</form>
+{% endblock %}
