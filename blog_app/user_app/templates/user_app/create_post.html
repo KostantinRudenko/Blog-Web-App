@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Создать пост</h2>
-    <form method="POST" action="{% url 'user:profile' %}" class="post-form">
+    <form method="post" action="{% url 'user:profile' %}" class="post-form">
         {% csrf_token %}
         <div>
             <label for="{{ post_form.title.id_for_label }}">Title</label>

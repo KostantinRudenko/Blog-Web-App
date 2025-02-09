@@ -36,8 +36,7 @@ class UserProfileForm(UserChangeForm):
 class PostForm(ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'id': 'title', 'placeholder': 'Enter title'}))
     content = forms.CharField(widget=forms.Textarea(attrs={'id': 'content', 'placeholder': 'Enter content'}))
-    created_at = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'time', 'readonly': True}))
-
+    
     class Meta:
         model = Post
         fields = ['title', 'content']
