@@ -25,5 +25,5 @@ urlpatterns = [
     path('about', about, name="about"),
     path('contacts', contacts, name="contacts"),
     path('user/', include('user_app.urls', namespace="user")),
-    path('post/', include('post_app.urls', namespace="post")),
+    path('posts/', include('post_app.urls', namespace="posts")),
 ]

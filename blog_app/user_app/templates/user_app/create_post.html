@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Создать пост</h2>
+    <form method="POST" action="{% url 'user:profile' %}" class="post-form">
+        {% csrf_token %}
+        <div>
+            <label for="{{ post_form.title.id_for_label }}">Title</label>
+            <div>
+                {{ post_form.title }}
+            </div>
+        </div>
+
+        <div>
+            <label for="{{ post_form.content.id_for_label }}">Text</label>
+            <div>
+                {{ post_form.content }}
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" name="create-post" class="btn">Опубликовать</button>
+        </div>
+    </form>
+</div>

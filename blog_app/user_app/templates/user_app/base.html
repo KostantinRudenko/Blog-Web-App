@@ -18,11 +18,19 @@
         <nav>
             <a class="nav-link" href="{% url 'index' %}">Главная</a>
             <a class="nav-link" href="{% url 'about' %}">Обо мне</a>
+            
             {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'user:profile' %}">Profile</a>
+            
+            {% if user.is_superuser %}
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
             {% else %}
-            <a class="nav-link" href="{% url 'user:login' %}">Log in</a>
-            <a class="nav-link" href="{% url 'user:signup' %}">Sign up</a>
+            <a class="nav-link" href="#">Guest</a>
+            {% endif %}
+            <a class="nav-link" href="{% url 'user:profile' %}">Profile</a>
+                
+            {% else %}
+                <a class="nav-link" href="{% url 'user:login' %}">Log in</a>
+                <a class="nav-link" href="{% url 'user:signup' %}">Sign up</a>
             {% endif %}
         </nav>
         <hr class="nav-divider">
