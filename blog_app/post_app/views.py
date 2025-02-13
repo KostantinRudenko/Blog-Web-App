@@ -16,8 +16,8 @@ def contacts(request):
     context = {"title": "Contacts"}
     return render(request, 'contacts.html', context)
 
-def post(request, post_id):
-    post = Post.objects.get(id=post_id)
+def post(request, title):
+    post = Post.objects.get(title=title)
     comments = Comments.objects.filter(post=post)
     context = {"title": "Post",
                "post": post,
