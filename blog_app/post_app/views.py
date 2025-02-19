@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 
+from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
 from .models import Post, Comments
@@ -15,9 +16,12 @@ class IndexView(ListView):
         context["title"] = "Posts"
         return context
 
-def about(request):
-    context = {"title": "About me"}
-    return render(request, 'about.html', context)
+class AboutView(TemplateView):
+    template_name = "about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titlle"] = "About me"
 
 def contacts(request):
     context = {"title": "Contacts"}
