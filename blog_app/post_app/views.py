@@ -23,10 +23,6 @@ class AboutView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["titlle"] = "About me"
 
-def contacts(request):
-    context = {"title": "Contacts"}
-    return render(request, 'contacts.html', context)
-
 def post(request, title):
     post = Post.objects.get(title=title)
     form = CreateCommentForm()
