@@ -1,13 +1,19 @@
 from django.shortcuts import render, HttpResponseRedirect
 
+from django.views.generic.list import ListView
+
 from .models import Post, Comments
 from .forms import CreateCommentForm
 # Create your views here.
 
-def index(request):
-    context = {"title": "Posts",
-               "posts": Post.objects.all()}
-    return render(request, 'index.html', context)
+class IndexView(ListView):
+    model = Post
+    template_name = "index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Posts"
+        return context
 
 def about(request):
     context = {"title": "About me"}
