@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
 from django.urls import reverse
 
-from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm
+from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm, PostForm
 
 # Create your views here.
 def login(request):
@@ -35,10 +35,18 @@ def signup(request):
     return render(request, 'user_app/signup.html', context)
 
 def profile(request):
+    post_form = PostForm()
     if request.method == "POST":
         if "logout" in request.POST:
             auth.logout(request)
             return HttpResponseRedirect(reverse('index'))
+        
+        elif "create-post" in request.POST:
+            form = PostForm(data=request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('user:profile'))
+            
         else:
             form = UserProfileForm(data=request.POST, instance=request.user)
             if form.is_valid():
@@ -46,6 +54,8 @@ def profile(request):
                 return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = UserProfileForm(instance=request.user)
+        post_form = PostForm()
     context = {"title" : "Profile",
-               "form" : form}
+               "form" : form,
+               "post_form" : post_form}
     return render(request, 'user_app/profile.html', context)

@@ -4,6 +4,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+<link rel="stylesheet" href="{% static 'styles/create_post.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -27,4 +28,7 @@
         <button type="submit" name="logout" value="logout">Logout</button>
     </div>
 </form>
+{% if user.is_superuser %}
+    {% include 'user_app/create_post.html' %}
+{% endif %}
 {% endblock %}
