@@ -12,20 +12,18 @@
 
 {% block content %}
 {% if form.non_field_errors or messages %}
-    <div class="alert">
-        {% if messages %}
-            <div class="alert alert-success" role="alert">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% if form.non_field_errors %}
-            <div class="alert alert-error" role="alert" style="color: #721c24;">
-                {{ form.non_field_errors }}
-            </div>
-        {% endif %}
-    </div>
+    {% if messages %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if form.non_field_errors %}
+        <div class="alert alert-error" role="alert" style="color: #721c24;">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
 {% endif %}
 <form action="{% url 'user:login' %}" method="post">
     {% csrf_token %}

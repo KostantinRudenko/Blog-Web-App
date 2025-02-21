@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth, messages
+from django.contrib import auth
 from django.urls import reverse, reverse_lazy
 
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm, PostForm
 from .models import User
@@ -17,11 +18,12 @@ class UserLoginView(TitleMixin, LoginView):
     form_class = UserAuthenticationForm
     title = "Login"
 
-class SignupView(TitleMixin, CreateView):
+class SignupView(TitleMixin, SuccessMessageMixin, CreateView):
     template_name = "user_app/signup.html"
     form_class = UserSignupForm
     model = User
     success_url = reverse_lazy("user:login")
+    success_message = "You are successfully signed up"
     title = "Signup"
 
 def profile(request):
