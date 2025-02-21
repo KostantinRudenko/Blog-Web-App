@@ -1,8 +1,11 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+
+from django.views.generic.edit import CreateView
 
 from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm, PostForm
+from .models import User
 
 # Create your views here.
 def login(request):
@@ -21,18 +24,16 @@ def login(request):
                "form" : form}
     return render(request, 'user_app/login.html', context)
 
-def signup(request):
-    if request.method == "POST":
-        form = UserSignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Account created successfully!")
-            return HttpResponseRedirect(reverse('user:login'))
-    else:
-        form = UserSignupForm()
-    context = {"title" : "Signup",
-               'form' : form}
-    return render(request, 'user_app/signup.html', context)
+class SignupView(CreateView):
+    template_name = "user_app/signup.html"
+    form_class = UserSignupForm
+    model = User
+    success_url = reverse_lazy("user:login")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Signup"
+        return context
 
 def profile(request):
     post_form = PostForm()
