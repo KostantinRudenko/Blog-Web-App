@@ -5,23 +5,19 @@ from django.views.generic.list import ListView
 
 from .models import Post, Comments
 from .forms import CreateCommentForm
+
+from common.views import TitleMixin
+
 # Create your views here.
 
-class IndexView(ListView):
+class IndexView(TitleMixin, ListView):
     model = Post
     template_name = "index.html"
+    title = "Posts"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Posts"
-        return context
-
-class AboutView(TemplateView):
+class AboutView(TitleMixin, TemplateView):
     template_name = "about.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["titlle"] = "About me"
+    title = "About me"
 
 def post(request, title):
     post = Post.objects.get(title=title)

@@ -8,22 +8,21 @@ from django.contrib.auth.views import LoginView
 from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm, PostForm
 from .models import User
 
+from common.views import TitleMixin
+
 # Create your views here.
 
-class UserLoginView(LoginView):
+class UserLoginView(TitleMixin, LoginView):
     template_name = "user_app/login.html"
     form_class = UserAuthenticationForm
+    title = "Login"
 
-class SignupView(CreateView):
+class SignupView(TitleMixin, CreateView):
     template_name = "user_app/signup.html"
     form_class = UserSignupForm
     model = User
     success_url = reverse_lazy("user:login")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = "Signup"
-        return context
+    title = "Signup"
 
 def profile(request):
     post_form = PostForm()
