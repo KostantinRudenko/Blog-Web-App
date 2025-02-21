@@ -1,21 +1,23 @@
 from django.shortcuts import render, HttpResponseRedirect
 
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
 from .models import Post, Comments
 from .forms import CreateCommentForm
+
+from common.views import TitleMixin
+
 # Create your views here.
 
-def index(request):
-    context = {"title": "Posts",
-               "posts": Post.objects.all()}
-    return render(request, 'index.html', context)
+class IndexView(TitleMixin, ListView):
+    model = Post
+    template_name = "index.html"
+    title = "Posts"
 
-def about(request):
-    context = {"title": "About me"}
-    return render(request, 'about.html', context)
-
-def contacts(request):
-    context = {"title": "Contacts"}
-    return render(request, 'contacts.html', context)
+class AboutView(TitleMixin, TemplateView):
+    template_name = "about.html"
+    title = "About me"
 
 def post(request, title):
     post = Post.objects.get(title=title)

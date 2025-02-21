@@ -1,38 +1,30 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth, messages
-from django.urls import reverse
+from django.contrib import auth
+from django.urls import reverse, reverse_lazy
+
+from django.views.generic.edit import CreateView
+from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm, PostForm
+from .models import User
+
+from common.views import TitleMixin
 
 # Create your views here.
-def login(request):
-    if request.method == "POST":
-        form = UserAuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
-            if user:
-                auth.login(request, user)
-                return HttpResponseRedirect(reverse('index'))
-    else:
-        form = UserAuthenticationForm()
-    context = {"title" : "Login",
-               "form" : form}
-    return render(request, 'user_app/login.html', context)
 
-def signup(request):
-    if request.method == "POST":
-        form = UserSignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Account created successfully!")
-            return HttpResponseRedirect(reverse('user:login'))
-    else:
-        form = UserSignupForm()
-    context = {"title" : "Signup",
-               'form' : form}
-    return render(request, 'user_app/signup.html', context)
+class UserLoginView(TitleMixin, LoginView):
+    template_name = "user_app/login.html"
+    form_class = UserAuthenticationForm
+    title = "Login"
+
+class SignupView(TitleMixin, SuccessMessageMixin, CreateView):
+    template_name = "user_app/signup.html"
+    form_class = UserSignupForm
+    model = User
+    success_url = reverse_lazy("user:login")
+    success_message = "You are successfully signed up"
+    title = "Signup"
 
 def profile(request):
     post_form = PostForm()
