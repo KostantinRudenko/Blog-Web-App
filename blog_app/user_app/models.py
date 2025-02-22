@@ -1,19 +1,23 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
+from django.core.mail import send_mail
 
 # Create your models here.
-class User(AbstractUser):
-    description = models.TextField(max_length=512, blank=True, null=True)
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='user_app_users',
-        blank=True
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='user_app_users',
-        blank=True
-    )
+class EmailVerification(models.Model):
+    code = models.UUIDField(unique=True)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expiration = models.DateTimeField()
+
+    def __str__(self):
+        return f"Email verification object for {self.user.email}"
     
-    class Meta:
-        pass
+    def send_verification_email(self):
+        send_mail(
+            "Subject here",
+            "Test verification email.",
+            "from@example.com",
+            ["to@example.com"],
+            fail_silently=False,
+        )
