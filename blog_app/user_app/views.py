@@ -7,7 +7,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm, PostForm
-from .models import User
+from .models import BaseUser
 
 from common.views import TitleMixin
 
@@ -21,7 +21,7 @@ class UserLoginView(TitleMixin, LoginView):
 class SignupView(TitleMixin, SuccessMessageMixin, CreateView):
     template_name = "user_app/signup.html"
     form_class = UserSignupForm
-    model = User
+    model = BaseUser
     success_url = reverse_lazy("user:login")
     success_message = "You are successfully signed up"
     title = "Signup"

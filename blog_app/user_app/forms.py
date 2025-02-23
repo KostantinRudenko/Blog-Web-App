@@ -3,14 +3,13 @@ from datetime import timedelta
 
 from django import forms
 
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from post_app.models import Post
 from django.forms import ModelForm
 
 from django.utils.timezone import now
 
-from .models import EmailVerification
+from .models import EmailVerification, BaseUser
 
 class UserAuthenticationForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'id':'username',
@@ -18,7 +17,7 @@ class UserAuthenticationForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'id':'password',
                                                                  'placeholder':'Enter password'}))
     class Meta:
-        model = User
+        model = BaseUser
         fields = ['username', 'password']
 
 class UserSignupForm(UserCreationForm):
@@ -28,7 +27,7 @@ class UserSignupForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'password2', 'placeholder': 'Confirm password'}))
 
     class Meta:
-        model = User
+        model = BaseUser
         fields = ['username', 'email', 'password1', 'password2']
 
     def save(self, commit=True):
@@ -44,7 +43,7 @@ class UserProfileForm(UserChangeForm):
     last_login = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'last_login', 'readonly': True}))
 
     class Meta:
-        model = User
+        model = BaseUser
         fields = ['username', 'email', 'last_login']
 
 class PostForm(ModelForm):
