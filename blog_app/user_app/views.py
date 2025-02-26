@@ -2,12 +2,13 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse, reverse_lazy
 
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 
 from .forms import UserAuthenticationForm, UserSignupForm, UserProfileForm, PostForm
-from .models import BaseUser
+from .models import BaseUser, EmailVerification
 
 from common.views import TitleMixin
 
@@ -51,3 +52,18 @@ def profile(request):
                "form" : form,
                "post_form" : post_form}
     return render(request, 'user_app/profile.html', context)
+
+class EmailVerificationView(TitleMixin, TemplateView):
+    title = "Email Verification"
+    template_name = "user_app/email_verification.html"
+    
+    def get(self, request, *args, **kwargs):
+        code = kwargs["uuid"]
+        user = BaseUser.objects.get(email=kwargs["email"])
+        verifivation = EmailVerification.objects.filter(user=user, code=code)
+        if verifivation.exists() and not verifivation.first().is_expired():
+            user.is_verified = True
+            user.save()
+            return super(EmailVerificationView, self).get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse("index"))
